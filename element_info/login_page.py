@@ -21,7 +21,7 @@ class LoginPage(BasePage):
         self.login_button={'element_name':'登录按钮',
                                 'locator_type':'xpath',
                                 'locator_value':'//button[@id="submit"]',
-                                'timeout':3}
+                                'timeout':10}
 
         # self.driver = webdriver.Chrome()
         # self.driver.implicitly_wait(10)
@@ -53,8 +53,8 @@ class LoginPage(BasePage):
 
 if __name__ == "__main__":
     driver=webdriver.Chrome()
-    login = LoginPage(driver)
-    login.open_url('http://wangyawen.w3.luyouxia.net/zentao/user-login.html')
-    login.input_username('wangyawen')
-    login.input_password('wyw123456.')
-    login.click_login()
+    login_page = LoginPage(driver)
+    login_page.open_url('http://106.53.50.202:8999/zentao3/www/user-login-L3plbnRhbzYvd3d3Lw==.html')
+    login_page.input_username('admin')
+    login_page.input_password('a12345678')
+    login_page.click_login()

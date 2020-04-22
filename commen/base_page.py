@@ -57,6 +57,12 @@ class BasePage(object):
         element.send_keys(content)
         logger.info('[%s]元素输入内容：%s'% (element_info['element_name'],content))
 
+    def get(self,element_info):
+        element=self.find_element(element_info)
+        value=element.text
+        logger.info('获取[%s]元素内容为：%s' % (element_info['element_name'],value))
+        return value
+
 
 
 
