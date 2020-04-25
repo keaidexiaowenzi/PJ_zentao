@@ -1,12 +1,9 @@
-import os
+from common.base_page import BasePage
+from common.config_value import ConfigUtils
+from common import set_driver
+from element_info import main_page
+from function import login
 import time
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from element_info.login_page import LoginPage
-from commen.log_utils import logger
-from commen.base_page import BasePage
-from element_info.main_page import MainPage
-
 
 class ProductPage(BasePage):
 
@@ -26,9 +23,13 @@ class ProductPage(BasePage):
                              'locator_type': 'xpath',
                              'locator_value': '//nav/ul/li[3]/a[@href="/zentao3/www/productplan-browse-1.html"]',
                              'timeout': 3}
-        self.productmain_Modular= {'elem ent_name': '产品主页模块',
+        self.productmain_Modular= {'element_name': '产品主页模块',
                               'locator_type': 'xpath',
-                              'locator_value': '//div[1]/ul/li[2]/a[2]/i[@class="icon-arrow-right text-primary""]',
+                              'locator_value': '//div[1]/div[1]/div/button[@class="btn"]',
+                              'timeout': 3}
+        self.allproduct_button= {'element_name': '所有产品按钮',
+                              'locator_type': 'xpath',
+                              'locator_value': '//div[1]/div/ul/li[2]/a[@href="/zentao3/www/product-all.html"]',
                               'timeout': 3}
     # 方法-》控件的操作
     # 进入添加产品页面
@@ -47,29 +48,33 @@ class ProductPage(BasePage):
     def click_productmain(self):
         self.click(self.productmain_Modular)
 
+    # 进入所有产品页面
+    def click_allproduct(self):
+        self.click(self.allproduct_button)
 
 if __name__ == "__main__":
-    driver = webdriver.Chrome()
-    login_page = LoginPage(driver)
-    login_page.open_url('http://wangyawen.w3.luyouxia.net/zentao/user-login.html')
-    login_page.input_username('wangyawen')
-    login_page.input_password('wyw123456.')
-    login_page.click_login()
-    time.sleep(20)
-
-    mainpage = MainPage(driver)
-    mainpage.refresh()
-    mainpage.get_username()
+    conf = ConfigUtils()
+    driver = set_driver.set_driver()
+    login.test_login(conf.get_zentao_url, conf.get_username, conf.get_password, driver)
+    # time.sleep(5)
+    mainpage= main_page.MainPage(driver)
     mainpage.goto_product()
-    mainpage.click_userModular()
-    mainpage.click_logout()
-
-    # time.sleep(3)
-    # username = mainpage.get_username()
-    # print(username)
-    # time.sleep(3)
-    # mainpage.goto_product()
-    # time.sleep(3)
-    # mainpage.click_userModular()
-    # time.sleep(3)
-    # mainpage.click_logout()
+    # 产品主页
+    productpage=ProductPage(driver)
+    # 用例6：进入添加产品页面
+    productpage.goto_addproduct()
+    time.sleep(2)
+    # 用例7：进入需求页面
+    productpage.goto_requirement()
+    time.sleep(2)
+    # 用例8：进入计划页面
+    productpage.goto_plan()
+    time.sleep(3)
+    # 用例9: 产品主页模块展示
+    productpage.click_productmain()
+    time.sleep(3)
+    # 用例10：进入所有产品页面
+    productpage.click_allproduct()
+    time.sleep(3)
+    # 退出登录
+    login.test_logout(driver)

@@ -1,11 +1,11 @@
-import os
+from common.log_utils import logger
+from common.base_page import  BasePage
+from common import set_driver
 import time
-from selenium import webdriver
+from common.config_value import ConfigUtils
+from function import login
 from selenium.webdriver.common.by import By
-from commen.log_utils import logger
-from commen.base_page import  BasePage
-# current_path=os.path.dirname(__file__)
-# driver_path=os.path.join(current_path,'../webdriver/chromerdriver')
+
 
 class LoginPage(BasePage):
     def __init__(self,driver):
@@ -52,9 +52,8 @@ class LoginPage(BasePage):
         self.click(self.login_button)
 
 if __name__ == "__main__":
-    driver=webdriver.Chrome()
-    login_page = LoginPage(driver)
-    login_page.open_url('http://106.53.50.202:8999/zentao3/www/user-login-L3plbnRhbzYvd3d3Lw==.html')
-    login_page.input_username('admin')
-    login_page.input_password('a12345678')
-    login_page.click_login()
+    # 用例1：登录成功用例
+    conf = ConfigUtils()
+    driver = set_driver.set_driver()
+    login.test_login(conf.get_zentao_url,conf.get_username,conf.get_password,driver)
+    time.sleep(3)

@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
-from commen.log_utils import logger
+from common.log_utils import logger
 
 class BasePage(object):
     def __init__(self,driver):
@@ -40,11 +40,11 @@ class BasePage(object):
             locator_type=By.CLASS_NAME
         elif locator_type_name=='xpath':
             locator_type=By.XPATH
-        element = WebDriverWait(self.driver,locator_timeout).\
-            until(lambda x:x.find_element(locator_type,locator_value_info))
+        element = WebDriverWait(self.driver, int(locator_timeout))\
+            .until(lambda x: x.find_element(locator_type, locator_value_info))
         # element_info怎么来的
         logger.info('[%s]元素识别成功'% element_info['element_name'])
-        return element
+        return  element
     # 点击操作
     def click(self,element_info):
         element=self.find_element(element_info)
