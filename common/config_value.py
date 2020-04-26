@@ -23,7 +23,10 @@ class ConfigUtils:
     def get_password(self):
         value = self.read_ini('user', 'password')
         return value
-
+    @property
+    def get_elements_url(self):
+        value=self.read_ini('excel','elements_url')
+        return value
 
 conf = ConfigUtils()
 

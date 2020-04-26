@@ -1,35 +1,41 @@
 import os
 import time
-
+from common.elements_data_utils import get_page_info
 from common.base_page import BasePage
 from common import set_driver
 from common.config_value import ConfigUtils
 from function import login
 
+elements = get_page_info('MainPage')
 
 class MainPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        # 把loginpage定义的driver对象转移到mainpage来
-        # self.driver = login.driver
+        self.product_menu = elements['product_menu']
+        self.username_showspan = elements['username_showspan']
+        self.user_Modular = elements['user_Modular']
+        self.logout_button = elements['logout_button']
+
+
+
         # 属性-》页面上的控件
-        self.product_menu = {'element_name': '产品菜单',
-                             'locator_type': 'xpath',
-                             'locator_value': '//nav/ul/li[2]/a[@href="/zentao3/www/product-index-no.html"]',
-                             'timeout': 5}
-        self.username_showspan = {'element_name': '登录用户名称',
-                                  'locator_type': 'xpath',
-                                  'locator_value': '//li/a/span[1][@class="user-name"]',
-                                  'timeout': 3}
-        self.user_Modular = {'element_name': '用户模块展示',
-                             'locator_type': 'xpath',
-                             'locator_value': '//li/a/span[1][@class="user-name"]',
-                             'timeout': 3}
-        self.logout_button = {'element_name': '退出登录按钮',
-                              'locator_type': 'xpath',
-                              'locator_value': '//li[13]/a[@href="/zentao3/www/user-logout.html"]',
-                              'timeout': 3}
+        # self.product_menu = {'element_name': '产品菜单',
+        #                      'locator_type': 'xpath',
+        #                      'locator_value': '//nav/ul/li[2]/a[@href="/zentao3/www/product-index-no.html"]',
+        #                      'timeout': 5}
+        # self.username_showspan = {'element_name': '登录用户名称',
+        #                           'locator_type': 'xpath',
+        #                           'locator_value': '//li/a/span[1][@class="user-name"]',
+        #                           'timeout': 3}
+        # self.user_Modular = {'element_name': '用户模块展示',
+        #                      'locator_type': 'xpath',
+        #                      'locator_value': '//li/a/span[1][@class="user-name"]',
+        #                      'timeout': 3}
+        # self.logout_button = {'element_name': '退出登录按钮',
+        #                       'locator_type': 'xpath',
+        #                       'locator_value': '//li[13]/a[@href="/zentao3/www/user-logout.html"]',
+        #                       'timeout': 3}
 
     # 方法-》控件的操作
     # 进入产品页面

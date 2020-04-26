@@ -1,3 +1,4 @@
+from common.elements_data_utils import get_page_info
 from common.log_utils import logger
 from common.base_page import  BasePage
 from common import set_driver
@@ -5,24 +6,34 @@ import time
 from common.config_value import ConfigUtils
 from function import login
 from selenium.webdriver.common.by import By
+import xlrd
+
+elements = get_page_info('LoginPage')
 
 
 class LoginPage(BasePage):
     def __init__(self,driver):
         super().__init__(driver)
-        self.username_inputbox={'element_name':'用户名输入框',
-                                'locator_type':'xpath',
-                                'locator_value':'//input[@name="account"]',
-                                'timeout':3}
-        self.password_inputbox={'element_name':'密码输入框',
-                                'locator_type':'xpath',
-                                'locator_value':'//input[@name="password"]',
-                                'timeout':3}
-        self.login_button={'element_name':'登录按钮',
-                                'locator_type':'xpath',
-                                'locator_value':'//button[@id="submit"]',
-                                'timeout':10}
 
+        # 方式三：
+        self.username_inputbox = elements['username_inputbox']
+        self.password_inputbox = elements['password_inputbox']
+        self.login_button = elements['login_button']
+
+        # 方式二：
+        # self.username_inputbox={'element_name':'用户名输入框',
+        #                         'locator_type':'xpath',
+        #                         'locator_value':'//input[@name="account"]',
+        #                         'timeout':3}
+        # self.password_inputbox={'element_name':'密码输入框',
+        #                         'locator_type':'xpath',
+        #                         'locator_value':'//input[@name="password"]',
+        #                         'timeout':3}
+        # self.login_button={'element_name':'登录按钮',
+        #                         'locator_type':'xpath',
+        #                         'locator_value':'//button[@id="submit"]',
+        #                         'timeout':10}
+        # 方式一：
         # self.driver = webdriver.Chrome()
         # self.driver.implicitly_wait(10)
         # self.driver.maximize_window()

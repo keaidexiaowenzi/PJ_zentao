@@ -4,33 +4,41 @@ from common import set_driver
 from element_info import main_page
 from function import login
 import time
+from common.elements_data_utils import get_page_info
+elements = get_page_info('ProductPage')
 
 class ProductPage(BasePage):
 
     def __init__(self, driver):
         # 继承父类
         super().__init__(driver)
+        self.addproduct_Button = elements['addproduct_Button']
+        self.requirement_menu = elements['requirement_menu']
+        self.plan_menu = elements['plan_menu']
+        self.productmain_Modular = elements['productmain_Modular']
+        self.allproduct_button = elements['allproduct_button']
+
         # 属性-》页面上的控件
-        self.addproduct_Button= {'element_name': '添加产品控件',
-                             'locator_type': 'xpath',
-                             'locator_value': '//div[2]/div/a[@href="/zentao3/www/product-create.html"]',
-                             'timeout': 5}
-        self.requirement_menu = {'element_name': '需求菜单',
-                                  'locator_type': 'xpath',
-                                  'locator_value': '//ul/li[1]/a[@href="/zentao3/www/product-browse-1.html"]',
-                                  'timeout': 3}
-        self.plan_menu = {'element_name': '计划菜单',
-                             'locator_type': 'xpath',
-                             'locator_value': '//nav/ul/li[3]/a[@href="/zentao3/www/productplan-browse-1.html"]',
-                             'timeout': 3}
-        self.productmain_Modular= {'element_name': '产品主页模块',
-                              'locator_type': 'xpath',
-                              'locator_value': '//div[1]/div[1]/div/button[@class="btn"]',
-                              'timeout': 3}
-        self.allproduct_button= {'element_name': '所有产品按钮',
-                              'locator_type': 'xpath',
-                              'locator_value': '//div[1]/div/ul/li[2]/a[@href="/zentao3/www/product-all.html"]',
-                              'timeout': 3}
+        # self.addproduct_Button= {'element_name': '添加产品控件',
+        #                      'locator_type': 'xpath',
+        #                      'locator_value': '//div[2]/div/a[@href="/zentao3/www/product-create.html"]',
+        #                      'timeout': 5}
+        # self.requirement_menu = {'element_name': '需求菜单',
+        #                           'locator_type': 'xpath',
+        #                           'locator_value': '//ul/li[1]/a[@href="/zentao3/www/product-browse-1.html"]',
+        #                           'timeout': 3}
+        # self.plan_menu = {'element_name': '计划菜单',
+        #                      'locator_type': 'xpath',
+        #                      'locator_value': '//nav/ul/li[3]/a[@href="/zentao3/www/productplan-browse-1.html"]',
+        #                      'timeout': 3}
+        # self.productmain_Modular= {'element_name': '产品主页模块',
+        #                       'locator_type': 'xpath',
+        #                       'locator_value': '//div[1]/div[1]/div/button[@class="btn"]',
+        #                       'timeout': 3}
+        # self.allproduct_button= {'element_name': '所有产品按钮',
+        #                       'locator_type': 'xpath',
+        #                       'locator_value': '//div[1]/div/ul/li[2]/a[@href="/zentao3/www/product-all.html"]',
+        #                       'timeout': 3}
     # 方法-》控件的操作
     # 进入添加产品页面
     def goto_addproduct(self):
