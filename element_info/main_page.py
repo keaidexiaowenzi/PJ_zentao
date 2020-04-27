@@ -1,12 +1,17 @@
 import os
 import time
-from common.elements_data_utils import get_page_info
+from common.elements_data_excel import get_page_info
 from common.base_page import BasePage
 from common import set_driver
 from common.config_value import ConfigUtils
 from function import login
+from common.elements_data_yml import ElementYamlData
 
-elements = get_page_info('MainPage')
+# 读取excel为数据源
+# elements = get_page_info('MainPage')
+# 读取yaml文件为数据源
+element_infos = ElementYamlData('MainPage')
+elements=element_infos.read_yaml()
 
 class MainPage(BasePage):
 

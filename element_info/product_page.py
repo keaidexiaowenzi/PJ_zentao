@@ -4,8 +4,14 @@ from common import set_driver
 from element_info import main_page
 from function import login
 import time
-from common.elements_data_utils import get_page_info
-elements = get_page_info('ProductPage')
+from common.elements_data_yml import ElementYamlData
+
+# 读取excel为数据源
+# elements = get_page_info('ProductPage')
+# 读取yaml文件为数据源
+element_infos = ElementYamlData('ProductPage')
+elements=element_infos.read_yaml()
+
 
 class ProductPage(BasePage):
 

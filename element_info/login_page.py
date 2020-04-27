@@ -1,4 +1,4 @@
-from common.elements_data_utils import get_page_info
+from common.elements_data_excel import get_page_info
 from common.log_utils import logger
 from common.base_page import  BasePage
 from common import set_driver
@@ -6,10 +6,13 @@ import time
 from common.config_value import ConfigUtils
 from function import login
 from selenium.webdriver.common.by import By
-import xlrd
+from common.elements_data_yml import ElementYamlData
 
-elements = get_page_info('LoginPage')
-
+# 读取excel为数据源
+# elements = get_page_info('LoginPage')
+# 读取yaml文件为数据源
+element_infos = ElementYamlData('LoginPage')
+elements=element_infos.read_yaml()
 
 class LoginPage(BasePage):
     def __init__(self,driver):

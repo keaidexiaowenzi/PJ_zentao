@@ -27,6 +27,11 @@ class ConfigUtils:
     def get_elements_url(self):
         value=self.read_ini('excel','elements_url')
         return value
+    @property
+    def get_elements_yaml_url(self):
+        value=self.read_ini('yaml','yaml_url')
+        return value
+
 
 conf = ConfigUtils()
 
@@ -34,4 +39,6 @@ if __name__ == '__main__':
     zantao_url = conf.get_zentao_url
     user_name = conf.get_username
     password = conf.get_password
+    value=conf.get_elements_yaml_url
+    print(value)
     print(zantao_url, user_name, password)
