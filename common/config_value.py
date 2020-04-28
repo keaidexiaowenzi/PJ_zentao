@@ -17,7 +17,7 @@ class ConfigUtils:
         return value
     @property
     def get_username(self):
-        value = self.read_ini('user', 'user_name')
+        value = self.read_ini('user', 'username')
         return value
     @property
     def get_password(self):
@@ -37,8 +37,8 @@ conf = ConfigUtils()
 
 if __name__ == '__main__':
     zantao_url = conf.get_zentao_url
-    user_name = conf.get_username
+    username = conf.get_username
     password = conf.get_password
     value=conf.get_elements_yaml_url
     print(value)
-    print(zantao_url, user_name, password)
+    print(zantao_url, username, password)
