@@ -32,13 +32,17 @@ class ConfigUtils:
         value=self.read_ini('yaml','yaml_url')
         return value
 
+    @property
+    def get_driver_name(self):
+        value=self.read_ini('driver','driver_name')
+        return value
 
 conf = ConfigUtils()
 
 if __name__ == '__main__':
-    zantao_url = conf.get_zentao_url
-    username = conf.get_username
-    password = conf.get_password
-    value=conf.get_elements_yaml_url
+    # zantao_url = conf.get_zentao_url
+    # username = conf.get_username
+    # password = conf.get_password
+    value=conf.get_driver_name
     print(value)
-    print(zantao_url, username, password)
+    # print(zantao_url, username, password)

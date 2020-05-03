@@ -1,18 +1,21 @@
+from self import self
+
 from common.elements_data_excel import get_page_info
 from common.log_utils import logger
 from common.base_page import  BasePage
 from common import set_driver
 import time
 from common.config_value import ConfigUtils
+from common.set_driver import Set_Driver
 from function import login
 from selenium.webdriver.common.by import By
 from common.elements_data_yml import ElementYamlData
 
 # 读取excel为数据源
-# elements = get_page_info('LoginPage')
+elements = get_page_info('Login')
 # 读取yaml文件为数据源
-element_infos = ElementYamlData('LoginPage')
-elements=element_infos.read_yaml()
+# element_infos = ElementYamlData('LoginPage')
+# elements=element_infos.read_yaml()
 
 class LoginPage(BasePage):
     def __init__(self,driver):
@@ -68,6 +71,7 @@ class LoginPage(BasePage):
 if __name__ == "__main__":
     # 用例1：登录成功用例
     conf = ConfigUtils()
-    driver = set_driver.set_driver()
+    driver = Set_Driver.set_Chrome_driver()
     login.test_login(conf.get_zentao_url,conf.get_username,conf.get_password,driver)
+
     time.sleep(3)

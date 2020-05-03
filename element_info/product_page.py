@@ -1,16 +1,18 @@
 from common.base_page import BasePage
 from common.config_value import ConfigUtils
 from common import set_driver
+from common.elements_data_excel import get_page_info
+from common.set_driver import Set_Driver
 from element_info import main_page
 from function import login
 import time
 from common.elements_data_yml import ElementYamlData
 
 # 读取excel为数据源
-# elements = get_page_info('ProductPage')
+elements = get_page_info('Product')
 # 读取yaml文件为数据源
-element_infos = ElementYamlData('ProductPage')
-elements=element_infos.read_yaml()
+# element_infos = ElementYamlData('ProductPage')
+# elements=element_infos.read_yaml()
 
 
 class ProductPage(BasePage):
@@ -68,13 +70,14 @@ class ProductPage(BasePage):
 
 if __name__ == "__main__":
     conf = ConfigUtils()
-    driver = set_driver.set_driver()
+    driver = Set_Driver.set_Chrome_driver()
     login.test_login(conf.get_zentao_url, conf.get_username, conf.get_password, driver)
     # time.sleep(5)
     mainpage= main_page.MainPage(driver)
     mainpage.goto_product()
     # 产品主页
     productpage=ProductPage(driver)
+    time.sleep(2)
     # 用例6：进入添加产品页面
     productpage.goto_addproduct()
     time.sleep(2)
